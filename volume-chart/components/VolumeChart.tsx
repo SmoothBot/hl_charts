@@ -246,22 +246,30 @@ export default function VolumeChart() {
         <h2 className="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-200">Volume Comparison</h2>
         <ResponsiveContainer width="100%" height={500}>
           <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 100 }}>
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
             <XAxis 
               dataKey="date" 
               angle={-45}
               textAnchor="end"
               height={100}
+              stroke="#9CA3AF"
+              tick={{ fill: '#9CA3AF' }}
             />
             <YAxis 
               tickFormatter={formatValue}
-              label={{ value: 'Volume (USD)', angle: -90, position: 'insideLeft' }}
+              label={{ value: 'Volume (USD)', angle: -90, position: 'insideLeft', fill: '#9CA3AF' }}
+              stroke="#9CA3AF"
+              tick={{ fill: '#9CA3AF' }}
             />
             <Tooltip 
               formatter={(value: number) => formatValue(value)}
               labelFormatter={(label) => `Date: ${label}`}
+              contentStyle={{ backgroundColor: '#1F2937', border: '1px solid #374151' }}
+              labelStyle={{ color: '#E5E7EB' }}
             />
-            <Legend />
+            <Legend 
+              wrapperStyle={{ color: '#9CA3AF' }}
+            />
             <Line 
               type="monotone" 
               dataKey="totalVolume" 
@@ -286,25 +294,33 @@ export default function VolumeChart() {
         <h2 className="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-200">Non-HLP Volume as % of Total Volume</h2>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 100 }}>
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
             <XAxis 
               dataKey="date" 
               angle={-45}
               textAnchor="end"
               height={100}
+              stroke="#9CA3AF"
+              tick={{ fill: '#9CA3AF' }}
             />
             <YAxis 
               tickFormatter={formatPercentage}
-              label={{ value: 'Non-HLP / Total Volume (%)', angle: -90, position: 'insideLeft' }}
+              label={{ value: 'Non-HLP / Total Volume (%)', angle: -90, position: 'insideLeft', fill: '#9CA3AF' }}
               domain={[0, 100]}
               scale="linear"
               ticks={[0, 20, 40, 60, 80, 100]}
+              stroke="#9CA3AF"
+              tick={{ fill: '#9CA3AF' }}
             />
             <Tooltip 
               formatter={(value: number) => formatPercentage(value)}
               labelFormatter={(label) => `Date: ${label}`}
+              contentStyle={{ backgroundColor: '#1F2937', border: '1px solid #374151' }}
+              labelStyle={{ color: '#E5E7EB' }}
             />
-            <Legend />
+            <Legend 
+              wrapperStyle={{ color: '#9CA3AF' }}
+            />
             <Line 
               type="monotone" 
               dataKey="nonHlpPercentage" 
