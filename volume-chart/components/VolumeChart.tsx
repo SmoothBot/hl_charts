@@ -29,6 +29,7 @@ interface ChartData {
   totalVolume: number;
   nonHlpVolume: number;
   nonHlpPercentage: number;
+  hlpPercentage: number;
 }
 
 export default function VolumeChart() {
@@ -76,11 +77,13 @@ export default function VolumeChart() {
           let nonHlpPct = total > 0 ? (nonHlp / total) * 100 : 0;
           // Cap percentage at 100%
           nonHlpPct = Math.min(nonHlpPct, 100);
+          const hlpPct = 100 - nonHlpPct;
           return {
             date,
             totalVolume: Math.round(total),
             nonHlpVolume: Math.round(nonHlp),
-            nonHlpPercentage: nonHlpPct
+            nonHlpPercentage: nonHlpPct,
+            hlpPercentage: hlpPct
           };
         });
 
@@ -245,7 +248,7 @@ export default function VolumeChart() {
       <div className="mb-12">
         <h2 className="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-200">Volume Comparison</h2>
         <ResponsiveContainer width="100%" height={500}>
-          <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 100 }}>
+          <LineChart data={chartData} margin={{ top: 5, right: 30, left: 50, bottom: 100 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
             <XAxis 
               dataKey="date" 
@@ -290,10 +293,10 @@ export default function VolumeChart() {
         </ResponsiveContainer>
       </div>
 
-      <div>
+      <div className="mb-12">
         <h2 className="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-200">Non-HLP Volume as % of Total Volume</h2>
         <ResponsiveContainer width="100%" height={400}>
-          <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 100 }}>
+          <LineChart data={chartData} margin={{ top: 5, right: 30, left: 50, bottom: 100 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
             <XAxis 
               dataKey="date" 
@@ -326,6 +329,49 @@ export default function VolumeChart() {
               dataKey="nonHlpPercentage" 
               stroke="#ff7300" 
               name="Non-HLP Volume / Total Volume"
+              strokeWidth={2}
+              dot={false}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div>
+        <h2 className="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-200">HLP Volume as % of Total Volume</h2>
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart data={chartData} margin={{ top: 5, right: 30, left: 50, bottom: 100 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+            <XAxis 
+              dataKey="date" 
+              angle={-45}
+              textAnchor="end"
+              height={100}
+              stroke="#9CA3AF"
+              tick={{ fill: '#9CA3AF' }}
+            />
+            <YAxis 
+              tickFormatter={formatPercentage}
+              label={{ value: 'HLP / Total Volume (%)', angle: -90, position: 'insideLeft', fill: '#9CA3AF' }}
+              domain={[0, 100]}
+              scale="linear"
+              ticks={[0, 20, 40, 60, 80, 100]}
+              stroke="#9CA3AF"
+              tick={{ fill: '#9CA3AF' }}
+            />
+            <Tooltip 
+              formatter={(value: number) => formatPercentage(value)}
+              labelFormatter={(label) => `Date: ${label}`}
+              contentStyle={{ backgroundColor: '#1F2937', border: '1px solid #374151' }}
+              labelStyle={{ color: '#E5E7EB' }}
+            />
+            <Legend 
+              wrapperStyle={{ color: '#9CA3AF' }}
+            />
+            <Line 
+              type="monotone" 
+              dataKey="hlpPercentage" 
+              stroke="#8b5cf6" 
+              name="HLP Volume / Total Volume"
               strokeWidth={2}
               dot={false}
             />
