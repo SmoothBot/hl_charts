@@ -41,6 +41,11 @@ export default function VolumeChart() {
   useEffect(() => {
     async function fetchData() {
       try {
+        // Only fetch on client side
+        if (typeof window === 'undefined') {
+          return;
+        }
+        
         const [totalRes, nonHlpRes] = await Promise.all([
           fetch('/data/total_volume.json'),
           fetch('/data/daily_nonhlp_usd_volume.json')
