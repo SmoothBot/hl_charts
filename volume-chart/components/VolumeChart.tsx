@@ -147,42 +147,66 @@ export default function VolumeChart() {
 
   return (
     <div className="w-full h-full p-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Daily Volume Analysis</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">Daily Volume Analysis</h1>
       
       <div className="flex flex-wrap gap-4 mb-6 justify-center">
         <div className="flex gap-2">
           <button
-            className={`px-4 py-2 rounded ${dateRange === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+            className={`px-4 py-2 rounded transition-colors ${
+              dateRange === 'all' 
+                ? 'bg-blue-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
+            }`}
             onClick={() => setDateRange('all')}
           >
             All Time
           </button>
           <button
-            className={`px-4 py-2 rounded ${dateRange === '7d' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+            className={`px-4 py-2 rounded transition-colors ${
+              dateRange === '7d' 
+                ? 'bg-blue-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
+            }`}
             onClick={() => setDateRange('7d')}
           >
             7 Days
           </button>
           <button
-            className={`px-4 py-2 rounded ${dateRange === '30d' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+            className={`px-4 py-2 rounded transition-colors ${
+              dateRange === '30d' 
+                ? 'bg-blue-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
+            }`}
             onClick={() => setDateRange('30d')}
           >
             30 Days
           </button>
           <button
-            className={`px-4 py-2 rounded ${dateRange === '90d' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+            className={`px-4 py-2 rounded transition-colors ${
+              dateRange === '90d' 
+                ? 'bg-blue-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
+            }`}
             onClick={() => setDateRange('90d')}
           >
             90 Days
           </button>
           <button
-            className={`px-4 py-2 rounded ${dateRange === '1y' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+            className={`px-4 py-2 rounded transition-colors ${
+              dateRange === '1y' 
+                ? 'bg-blue-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
+            }`}
             onClick={() => setDateRange('1y')}
           >
             1 Year
           </button>
           <button
-            className={`px-4 py-2 rounded ${dateRange === 'custom' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+            className={`px-4 py-2 rounded transition-colors ${
+              dateRange === 'custom' 
+                ? 'bg-blue-500 text-white' 
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
+            }`}
             onClick={() => setDateRange('custom')}
           >
             Custom
@@ -191,21 +215,21 @@ export default function VolumeChart() {
         
         {dateRange === 'custom' && (
           <div className="flex gap-2 items-center">
-            <label>From:</label>
+            <label className="text-gray-700 dark:text-gray-300">From:</label>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="px-2 py-1 border rounded"
+              className="px-2 py-1 border rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600"
               min={allData[0]?.date}
               max={allData[allData.length - 1]?.date}
             />
-            <label>To:</label>
+            <label className="text-gray-700 dark:text-gray-300">To:</label>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="px-2 py-1 border rounded"
+              className="px-2 py-1 border rounded bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600"
               min={allData[0]?.date}
               max={allData[allData.length - 1]?.date}
             />
@@ -214,7 +238,7 @@ export default function VolumeChart() {
       </div>
       
       <div className="mb-12">
-        <h2 className="text-xl font-semibold mb-4 text-center">Volume Comparison</h2>
+        <h2 className="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-200">Volume Comparison</h2>
         <ResponsiveContainer width="100%" height={500}>
           <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 100 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -254,7 +278,7 @@ export default function VolumeChart() {
       </div>
 
       <div>
-        <h2 className="text-xl font-semibold mb-4 text-center">Non-HLP Volume as % of Total Volume</h2>
+        <h2 className="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-200">Non-HLP Volume as % of Total Volume</h2>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 100 }}>
             <CartesianGrid strokeDasharray="3 3" />
