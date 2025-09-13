@@ -260,7 +260,6 @@ export default function VolumeChart() {
             />
             <YAxis 
               tickFormatter={formatValue}
-              label={{ value: 'Volume (USD)', angle: -90, position: 'insideLeft', fill: '#9CA3AF' }}
               stroke="#9CA3AF"
               tick={{ fill: '#9CA3AF' }}
             />
@@ -308,7 +307,6 @@ export default function VolumeChart() {
             />
             <YAxis 
               tickFormatter={formatPercentage}
-              label={{ value: 'Non-HLP / Total Volume (%)', angle: -90, position: 'insideLeft', fill: '#9CA3AF' }}
               domain={[0, 100]}
               scale="linear"
               ticks={[0, 20, 40, 60, 80, 100]}
@@ -351,7 +349,6 @@ export default function VolumeChart() {
             />
             <YAxis 
               tickFormatter={formatPercentage}
-              label={{ value: 'HLP / Total Volume (%)', angle: -90, position: 'insideLeft', fill: '#9CA3AF' }}
               domain={[0, 100]}
               scale="linear"
               ticks={[0, 20, 40, 60, 80, 100]}
